@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Type Effectiveness Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #ee1515;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+        h1 {
+            margin-bottom: 0;
+        }
+        .calculator {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        button {
+            background-color: #3b4cca;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2a3bbf;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ffde00;
+            border-radius: 5px;
+        }
+        footer a {
+            color: #3b4cca;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pokemon Type Effectiveness Calculator</h1>
+    </header>
+    
+    <div class="calculator">
+        <h2>Check Type Effectiveness</h2>
+        <select id="attackType">
+            <option value="">Select Attack Type</option>
+            <option value="normal">Normal</option>
+            <option value="fire">Fire</option>
+            <option value="water">Water</option>
+            <option value="electric">Electric</option>
+            <option value="grass">Grass</option>
+            <!-- Add more types as needed -->
+        </select>
+        <select id="defenseType">
+            <option value="">Select Defense Type</option>
+            <option value="normal">Normal</option>
+            <option value="fire">Fire</option>
+            <option value="water">Water</option>
+            <option value="electric">Electric</option>
+            <option value="grass">Grass</option>
+            <!-- Add more types as needed -->
+        </select>
+        <button onclick="calculateEffectiveness()">Calculate</button>
+        <div id="result"></div>
+    </div>
+
+    <footer>
+        For more Pokemon tools and information, visit our main website: 
+        <a href="https://www.yourpokemonwebsite.com" target="_blank">www.yourpokemonwebsite.com</a>
+    </footer>
+
+    <script>
+        function calculateEffectiveness() {
+            const attackType = document.getElementById('attackType').value;
+            const defenseType = document.getElementById('defenseType').value;
+            let result = "The effectiveness is: ";
+
+            if (attackType && defenseType) {
+                // This is a simplified calculation. In a real app, you'd have a more complex type chart.
+                if (attackType === defenseType) {
+                    result += "Not very effective (0.5x damage)";
+                } else if (
+                    (attackType === "fire" && defenseType === "grass") ||
+                    (attackType === "water" && defenseType === "fire") ||
+                    (attackType === "grass" && defenseType === "water") ||
+                    (attackType === "electric" && defenseType === "water")
+                ) {
+                    result += "Super effective (2x damage)";
+                } else if (
+                    (attackType === "fire" && defenseType === "water") ||
+                    (attackType === "grass" && defenseType === "fire") ||
+                    (attackType === "water" && defenseType === "grass") ||
+                    (attackType === "electric" && defenseType === "grass")
+                ) {
+                    result += "Not very effective (0.5x damage)";
+                } else {
+                    result += "Normal effectiveness (1x damage)";
+                }
+            } else {
+                result = "Please select both attack and defense types.";
+            }
+
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+</body>
+</html>
